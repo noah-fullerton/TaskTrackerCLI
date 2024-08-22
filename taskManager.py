@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
+from datetime import datetime
 
 
-filename = Path("tasks.json")
+filename = Path("tasklist.json")
 
 # need to determine how to structure this
 
@@ -19,6 +20,8 @@ def getTaskList():
     # make sure file exists
     if not filename.exists():
         filename.touch()
+        with open(filename, "w") as json_file:
+            json.dump({}, json_file, indent=4)
 
     # get info from file
     with open(filename, 'r') as json_file:
@@ -27,20 +30,18 @@ def getTaskList():
 
 def setTaskList(taskList):
     """helper function to set the task list in the json file"""
-    # make sure file exists
-    if not filename.exists():
-        filename.touch()
-
     # update file with new info
     with open(filename, "w") as json_file:
         json.dump(taskList, json_file, indent=4)
 
 def addTask(description):
     """add new tasks to the list"""
-    # get tasklist from file
-    # append new task to end of tasklist with new description
-    # rewrite file with new tasklist
-    pass
+    taskList = getTaskList()
+    id = len(taskList) + 1
+    dt = datetime.now().isoformat()
+    newTask = {"description": description, "status": "to-do", "createdAt": dt, "updatedAt": dt}
+    taskList[id] = newTask
+    setTaskList(taskList)
 
 def updateTask(id, newDescription):
     """update a task description by its ID"""
@@ -71,5 +72,4 @@ def listTasks():
     
 
 if __name__ == '__main__':
-    # this will be used for testing, not needed in final product
-    pass
+    addTask("test1")
