@@ -14,8 +14,6 @@ filename = Path("tasks.json")
 # need to make sure setTaskList is called at the end of any functions that modify
 # gettasklist and settasklist are only called in the other functions
 
-# initialize task list
-
 def getTaskList():
     """helper function to get the task list from the json file"""
     # make sure file exists
@@ -29,7 +27,6 @@ def getTaskList():
 
 def setTaskList(taskList):
     """helper function to set the task list in the json file"""
-
     # make sure file exists
     if not filename.exists():
         filename.touch()
