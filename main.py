@@ -1,9 +1,12 @@
 import typer
+from task import Task
 
 app = typer.Typer()
 
 @app.command()
 def add(task: str):
+    tk1 = Task(id = 1, description = task)
+    print(tk1)
     """add task to the list"""
 
 @app.command()
