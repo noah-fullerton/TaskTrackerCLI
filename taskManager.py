@@ -39,7 +39,7 @@ def addTask(description):
     taskList = getTaskList()
 
     # new id is id of last task + 1
-    id = list(taskList.keys())[-1] + 1
+    id = int(list(taskList.keys())[-1]) + 1
 
     dt = datetime.now().isoformat()
 
@@ -76,7 +76,6 @@ def listTasks(status=None):
         return conditionalTaskList
                 
     return taskList
-    
 
 if __name__ == '__main__':
-    print(listTasks("done"))
+    addTask("test task")

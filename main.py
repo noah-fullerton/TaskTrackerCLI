@@ -1,34 +1,43 @@
 import typer
-from task import Task
+import taskManager
 
 app = typer.Typer()
 
 @app.command()
-def add(task: str):
-    tk1 = Task(id = 1, description = task)
-    print(tk1)
+def add(description: str):
     """add task to the list"""
+    taskManager.addTask(description)
+    print(f"Task '{description}' added to the list")
+
 
 @app.command()
-def update():
+def update(id: int, description: str):
     """update a task by its ID"""
+    taskManager.updateTask(id, description)
+    print(f"Task {id} updated to '{description}'")
+
 
 @app.command()
-def delete():
+def delete(id: int):
     """remove a task by its ID"""
+    taskManager.deleteTask(id)
+    print(f"Task {id} deleted")
+
 
 @app.command()
-def mark_in_progress():
-    """mark task as in progress"""
+def mark_to_do(id: int):
+    """mark task as to-do"""
+    taskManager.changeTaskStatus(id, "to-do")
 
 @app.command()
 def mark_done():
     """mark task as done"""
+    taskManager.changeTaskStatus(id, "done")
 
 @app.command()
 def list():
     """list all tasks"""
-
+    print(taskManager.listTasks())
 
 
 if __name__ == '__main__':
