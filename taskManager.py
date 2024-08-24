@@ -37,10 +37,16 @@ def setTaskList(taskList):
 def addTask(description):
     """add new tasks to the list"""
     taskList = getTaskList()
-    id = len(taskList) + 1
+
+    highestIdSoFar = 0
+    for x in taskList.keys():
+        if int(x) > highestIdSoFar:
+            highestIdSoFar = int(x)
+    id = highestIdSoFar + 1
+
     dt = datetime.now().isoformat()
-    newTask = {"description": description, "status": "to-do", "createdAt": dt, "updatedAt": dt}
-    taskList[id] = newTask
+
+    taskList[id] = {"description": description, "status": "to-do", "createdAt": dt, "updatedAt": dt}
     setTaskList(taskList)
 
 def updateTask(id, newDescription):
@@ -52,10 +58,9 @@ def updateTask(id, newDescription):
 
 def deleteTask(id):
     """remove a task by its ID"""
-    # get tasklist from file
-    # delete task based off taskID
-    # rewrite file with new tasklist
-    pass
+    taskList = getTaskList()
+    del taskList[str(id)]
+    setTaskList(taskList)
 
 def changeTaskStatus(id, status):
     """changes status of task"""
@@ -72,4 +77,5 @@ def listTasks():
     
 
 if __name__ == '__main__':
-    addTask("test1")
+    addTask("test3")
+    deleteTask(6)
