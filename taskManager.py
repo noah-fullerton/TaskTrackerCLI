@@ -38,11 +38,8 @@ def addTask(description):
     """add new tasks to the list"""
     taskList = getTaskList()
 
-    highestIdSoFar = 0
-    for x in taskList.keys():
-        if int(x) > highestIdSoFar:
-            highestIdSoFar = int(x)
-    id = highestIdSoFar + 1
+    # new id is id of last task + 1
+    id = list(taskList.keys())[-1] + 1
 
     dt = datetime.now().isoformat()
 
@@ -78,4 +75,3 @@ def listTasks():
 
 if __name__ == '__main__':
     addTask("test3")
-    deleteTask(6)
