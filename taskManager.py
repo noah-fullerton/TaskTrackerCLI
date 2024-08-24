@@ -48,10 +48,9 @@ def addTask(description):
 
 def updateTask(id, newDescription):
     """update a task description by its ID"""
-    # get tasklist from file
-    # update task based off of taskID
-    # rewrite file with new tasklist
-    pass
+    taskList = getTaskList()
+    taskList[str(id)]["description"] = newDescription
+    setTaskList(taskList)
 
 def deleteTask(id):
     """remove a task by its ID"""
@@ -61,17 +60,23 @@ def deleteTask(id):
 
 def changeTaskStatus(id, status):
     """changes status of task"""
-    # get tasklist from file
-    # change task status to new status using id and given status
-    # rewrite file with new tasklist
-    pass
+    taskList = getTaskList()
+    taskList[str(id)]["status"] = status
+    setTaskList(taskList)
 
-def listTasks():
+
+def listTasks(status=None):
     """list all tasks"""
-    # get tasklist from file
-    # return tasklist
-    pass
+    taskList = getTaskList()
+    if status is not None:
+        conditionalTaskList = {}
+        for x in taskList:
+            if taskList[x]["status"] == status:
+                conditionalTaskList[x] = taskList[x]
+        return conditionalTaskList
+                
+    return taskList
     
 
 if __name__ == '__main__':
-    addTask("test3")
+    print(listTasks("done"))
