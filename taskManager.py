@@ -5,16 +5,6 @@ from datetime import datetime
 
 filename = Path("tasklist.json")
 
-# need to determine how to structure this
-
-# make a manager function
-
-# each of the task functions first needs to get infro from file
-# then based on its funciton it either adds, removes, updates, the python dictionary taskList
-# then it updates the file with the new content (except for list which just lists the tasks)
-# need to make sure setTaskList is called at the end of any functions that modify
-# gettasklist and settasklist are only called in the other functions
-
 def getTaskList():
     """helper function to get the task list from the json file"""
     # make sure file exists
